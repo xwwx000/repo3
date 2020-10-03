@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwwx.sewage.dao.UserDao">
+	<!-- 定义结果集，column表示sql查询列,property表示映射到实体的属性 -->
+	<resultMap type="com.xwwx.sewage.bean.TCommUser" id="userAndDept">
+	    <id column="id" property="id"/>
+	    <result column="userid" property="userid"/>
+	    <result column="username" property="username"/>
+	    <result column="userpwd" property="userpwd"/>
+	     <result column="deptcode" property="deptcode"/>
+	     <result column="groupid" property="groupid"/>
+	     <result column="pagenum" property="pagenum"/>
+	    <result column="status" property="status"/>
+	    <result column="lastloginip" property="lastloginip"/>
+	    <result column="lastlogintime" property="lastlogintime"/>
+	    <!-- 关联对象 -->
+	    <association property="dept" javaType="com.xwwx.sewage.bean.TCommDept">
+	        <!-- 关联条件TCommUser的dept_id对应着TCommDept的deptcode -->
+	        <id column="deptcode" property="deptcode"/>
+	        <result column="deptcode" property="deptcode"/>
+	        <result column="deptname" property="deptname"/>
+	    </association>
+	   	<association property="group" javaType="com.xwwx.sewage.bean.TCommUserGroup">
+	        <!-- 关联条件TCommUser的groupid对应着TCommUserGroup的groupid -->
+	        <id column="groupid" property="groupid"/>
+	        <result column="groupid" property="groupid"/>
+	        <result column="groupdesc" property="groupdesc"/>
+	    </association>
+	</resultMap>
+	<!-- 登录验证 -->
+	<select id="getUserByUserIdAndPassword"
+		resultMap="userAndDept" parameterType="string">
+		select a.*,b.deptname,c.groupdesc from t_comm_user a left join t_comm_dept b on a.deptcode=b.deptcode left join t_comm_usergroup c on a.groupid=c.groupid where USERID = #{USERID} and USERPWD = #{USERPWD}
+	</select>
+	<!-- 根据用户ID获取用户 -->
+	<select id="getUserByUserId" resultType="com.xwwx.sewage.bean.TCommUser" parameterType="string">
+		select * from t_comm_user where USERID = #{USERID} 
+	</select>
+	<!-- 更新用户 -->
+	<update id="updateUser" parameterType="com.xwwx.sewage.bean.TCommUser">
+		update t_comm_user 
+		set username=#{username},
+			deptcode=#{deptcode},
+			userpwd=#{userpwd},
+			groupid=#{groupid},
+			lastlogintime=#{lastlogintime},
+			lastloginip=#{lastloginip}
+		where userid=#{userid}	
+	</update>
+	<select id="getMenuByUserIdAndModuleId" parameterType="String" resultType="com.xwwx.sewage.bean.TCommModule" statementType="CALLABLE">
+		{call sel_menubyuser(#{moduleid,mode=IN},#{userid,mode=IN})}
+	</select>
+	<!-- 心跳 -->
+	<select id="getUserCount" resultType="Integer" >
+		select count(*) from t_comm_user where 1=2
+	</select>	
+</mapper>

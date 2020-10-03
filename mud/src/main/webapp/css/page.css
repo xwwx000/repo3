@@ -1,0 +1,31 @@
+.pagination {
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; text-align: center;PADDING-TOP: 5px
+}
+.pagination A {
+	BORDER-BOTTOM: #aaaadd 1px solid; BORDER-LEFT: #aaaadd 1px solid; PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; COLOR: #006699; BORDER-TOP: #aaaadd 1px solid; BORDER-RIGHT: #aaaadd 1px solid; TEXT-DECORATION: none; PADDING-TOP: 2px
+}
+.pagination A:link {
+	BORDER-BOTTOM: #aaaadd 1px solid; BORDER-LEFT: #aaaadd 1px solid; PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; COLOR: #006699; BORDER-TOP: #aaaadd 1px solid; BORDER-RIGHT: #aaaadd 1px solid; TEXT-DECORATION: none; PADDING-TOP: 2px
+}
+.pagination A:visited {
+	BORDER-BOTTOM: #aaaadd 1px solid; BORDER-LEFT: #aaaadd 1px solid; PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; COLOR: #006699; BORDER-TOP: #aaaadd 1px solid; BORDER-RIGHT: #aaaadd 1px solid; TEXT-DECORATION: none; PADDING-TOP: 2px
+}
+.pagination A:hover {
+	BORDER-BOTTOM: #006699 1px solid; BORDER-LEFT: #006699 1px solid; COLOR: #000; BORDER-TOP: #006699 1px solid; BORDER-RIGHT: #006699 1px solid; TEXT-DECORATION: none
+}
+.pagination A:active {
+	BORDER-BOTTOM: #006699 1px solid; BORDER-LEFT: #006699 1px solid; COLOR: #000; BORDER-TOP: #006699 1px solid; BORDER-RIGHT: #006699 1px solid; TEXT-DECORATION: none
+}
+.pagination SPAN.current {
+	BORDER-BOTTOM: #006699 1px solid; BORDER-LEFT: #006699 1px solid; PADDING-BOTTOM: 2px; BACKGROUND-COLOR: #006699; MARGIN: 2px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; COLOR: #fff; BORDER-TOP: #006699 1px solid; FONT-WEIGHT: bold; BORDER-RIGHT: #006699 1px solid; PADDING-TOP: 2px
+}
+.pagination SPAN.disabled {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 2px; MARGIN: 2px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; COLOR: #ddd; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 2px
+}
+A.underline {
+	TEXT-DECORATION: underline
+}
+.underline A {
+	TEXT-DECORATION: underline
+}
+.hot{color:red}

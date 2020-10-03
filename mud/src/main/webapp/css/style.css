@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 全局 */
+*{ margin: 0; padding:0; outline: none; box-sizing:border-box;}
+body{ font-size:100%; color:#565656; font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+ul,ol,li{ list-style-type: none;}
+a{ text-decoration: none;}
+input{ font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+.clearfix:after{ content: "."; clear: both; display: block; height: 0; visibility: hidden;}
+
+/* 顶部 */
+.header{ width: 100%; height: 80px; background-color: #0080ff;}
+.logo{ 
+	margin:16px 0 0 5%;
+	/* IE7 Hack */
+	*float:left;
+}
+
+#headNav{ float:right; color:#fff;}
+#headNav ul li{ width:10em; float:right; display:block; height:80px; line-height:80px; font-size: 1.125em; text-align:center; border-left:#0071e1 1px solid;}
+#headNav ul li:hover{ cursor: pointer;}
+#headNav ul li.headNavCur{ background-color:#0073e6;}
+#info2{display:none}
+
+.content{ 
+	padding:20px 25px;
+	/* IE7&IE6 Hack */
+	*padding:20px 25px;
+}
+.monitoringTable td{}
+.mapBox{ width:100%; height: 560px; background-image: url(../images/mapimg.jpg); border:#e5e8f1 1px solid; position: relative; z-index: 10;}
+.mapBox img{ 
+	width: 100%; height: 100%;
+}
+.switch{ width: 10px; height: 100px; background-color:#0080FF; background-image: url(../images/direction-right.png); background-position: center center; background-repeat: no-repeat; position: absolute; right: -10px; top: 50%; margin-top:-50px; z-index: 10; cursor: pointer; border-radius: 0 5px 5px 0;}
+.inquireBox{ 
+	width:300px; height:560px; margin-left:20px; display: block; overflow: hidden;
+	/* IE7&IE6 Hack */
+	*width: 302px; height: 560px;
+}
+
+.fullScreen{ width:5em; height: 2em; line-height: 2em; font-size: .875em; background-color:#0080ff; color:#fff; border-radius: 3px; text-align: center; position: absolute; bottom: 8px; right: 8px;}
+.fullScreen:hover{ cursor: pointer;}
+
+.GPSwindo{ 
+	width:22em; background-color:#fff; border:#bbb 1px solid; padding:20px; font-size: .875em; position: relative;
+	-webkit-box-shadow: 5px 5px 20px 1px #999;
+	box-shadow: 5px 5px 20px 1px #999;
+}
+.GPSwindo li{ line-height: 1.5em; clear:both;}
+.GPSwindo li a{ color:#077bd2;}
+.XBtn{ width: 20px; height: 20px; background-image: url(../images/x.gif); background-repeat: no-repeat; position: absolute; top:10px; right: 10px; cursor: pointer; z-index: 1;}
+.pointer{ width: 28px; height: 28px; background-image: url(../images/pointer.png); background-repeat: no-repeat; position: absolute; bottom: -28px; left: 50%; margin-left:-14px; z-index: 1;}
+
+#inquireTab{ 
+	width:300px; height: 560px; border:#e5e8f1 1px solid;
+	/* IE7&IE6 Hack */
+	*width: 298px; *height: 558px; *overflow: hidden;
+}
+#inquireTab>ul{ margin:0px; padding:0px; list-style:none; height:2.5em; border-bottom: #e7eaef 1px solid;}
+#inquireTab>ul li{ 
+	width:33%; float:left; display:inline; height:2.5em; line-height:2.5em; text-align:center; color:#93b8d5; border-left: #e7eaef 1px solid;
+	/* IE7&IE6 Hack */
+	*width:24%; *overflow: hidden;
+}
+#inquireTab ul li:hover{ cursor: pointer;}
+#inquireTab ul li.cur{ width:34%; background-color:#ebf4fd; color:#077bd2; font-weight: 500;}
+#inquireInfo2, #inquireInfo3, #inquireInfo4{ display:none}
+
+.footInfo{ margin-top:20px;}
+.footInfo table{ text-align: center; background-color:#e5e8f1;}
+.footInfo table tr.row1 th{ height: 2em; background-color:#ebf4fd; color:#077bd2; font-weight: 500;}
+.footInfo table tr.row2 th{ height:2em; font-size: .875em; color:#585c61; font-weight: 500; background-color: #fff;}
+.footInfo table td{ height: 2em; font-size: .875em; background-color: #fff;}
+
+
+#carStatisticsTab{ width:100%; overflow: hidden;}
+#carStatisticsTab ul{ margin:0px; padding:0px; list-style:none; height:2.5em; margin-bottom:20px;}
+#carStatisticsTab ul li{ width:8em; font-size: .875em; float:left; display:inline; height:2.5em; line-height:2.5em; text-align:center; color:#0b63a3; background-color:#f5f8fd; margin-right:1em; border: #e7eaef 1px solid;}
+#carStatisticsTab ul li:hover{ cursor: pointer;}
+#carStatisticsTab ul li.cur{ background-color:#288cee; color:#fff; font-weight: 500;}
+#statisticsInfo2, #statisticsInfo3, #statisticsInfo4, #statisticsInfo5, #statisticsInfo6, #statisticsInfo7{ display:none;}
+#carStatisticsTab > div[id^="statisticsInfo"]{ border:#e7eaef 1px solid; padding:20px 26px;}
+
+
+#inquireTab #inquireInfo1, 
+#inquireTab #inquireInfo2, 
+#inquireTab #inquireInfo3, 
+#inquireTab #inquireInfo4{ 
+	width: 300px; height:560px; border:0px; padding:18px 12px;
+	/* IE8&IE7&IE6 Hack */
+	width: 290px\9; height: 510px\9;
+}
+#carStatisticsTab iframe{ width: 100%; min-height:570px; border:0;}
+
+.GPDInfoTd{ width: 100%; height: 72px; overflow-y:scroll;}
+.GPDInfoTd table td{ height: 24px; border-bottom:#e5e8f1 1px solid;}

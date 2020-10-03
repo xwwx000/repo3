@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwwx.sewage.dao.PdaDao">
+	<resultMap id="macResult" type="java.lang.String" >
+	    <result column="macaddr" property="macaddr" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 登录验证 -->
+	<select id="getAllPdaMacAddrList"
+		resultMap="macResult" >
+		select macaddr from t_cs_macaddr where status = 0
+	</select>
+	<!-- 取padmacaddr -->
+	<select id="getPdaMacAddrList"
+		resultType="com.xwwx.sewage.bean.TCsPdaMacAddr" parameterType="java.util.Map">
+		select * from t_cs_macaddr
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>		
+	</select>	
+	<select id="getPdaMacAddrCount" resultType="Integer" parameterType="java.util.Map">
+		select count(*) from t_cs_macaddr where 1=1
+	</select>
+	<!-- 登录验证 -->
+	<select id="getUserByUserIdAndPassword"
+		resultType="com.xwwx.sewage.bean.TCsPdaUser" parameterType="string">
+		select * from t_cs_pdauser where pdauserid = #{pdauserid} and pdapwd = #{pdapwd}
+	</select>
+	<!-- 插入mac地址 -->
+	<insert id="insertPdaMacAddr" parameterType="com.xwwx.sewage.bean.TCsPdaMacAddr">
+		insert t_cs_macaddr 
+		(macaddr,status) 
+		values 
+		(#{macaddr},#{status})
+	</insert>
+	<!-- 删除mac地址 -->
+	<delete id="deletePdaMacAddr" parameterType="com.xwwx.sewage.bean.TCsPdaMacAddr">
+	   delete from t_cs_macaddr where id=#{id}
+	</delete>	
+	<!--修改mac地址-->
+	<update id="updatePdaMacAddr" parameterType="com.xwwx.sewage.bean.TCsPdaMacAddr">
+       update t_cs_macaddr set macaddr=#{macaddr},status=#{status} WHERE id=#{id}
+	</update>	
+	<!-- pda用户列表 -->
+	<select id="getPdaUserList"
+		resultType="com.xwwx.sewage.bean.TCsPdaUser" parameterType="java.util.Map">
+		select * from t_cs_pdauser
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>		
+	</select>	
+	<select id="getPdaUserCount" resultType="Integer" parameterType="java.util.Map">
+		select count(*) from t_cs_pdauser where 1=1
+	</select>
+	<!-- 插入pda用户 -->
+	<insert id="insertPdaUser" parameterType="com.xwwx.sewage.bean.TCsPdaUser">
+		insert t_cs_pdauser 
+		(pdauserid,pdausername,pdapwd,pdatype,pdadept) 
+		values 
+		(#{pdauserid},#{pdausername},#{pdapwd},#{pdatype},#{pdadept})
+	</insert>
+	<!-- 删除pda用户 -->
+	<delete id="deletePdaUser" parameterType="com.xwwx.sewage.bean.TCsPdaUser">
+	   delete from t_cs_pdauser where id=#{id}
+	</delete>	
+	<!--修改pda用户-->
+	<update id="updatePdaUser" parameterType="com.xwwx.sewage.bean.TCsPdaUser">
+       update t_cs_pdauser set pdauserid=#{pdauserid},pdausername=#{pdausername},pdatype=#{pdatype},pdadept=#{pdadept} WHERE id=#{id}
+	</update>	
+	<select id="getPdaUserById"
+		resultType="com.xwwx.sewage.bean.TCsPdaUser" parameterType="Integer">
+		select * from t_cs_pdauser where id = #{id}
+	</select>
+	<!-- 插入tid -->
+	<insert id="insertTid" parameterType="string">
+		insert t_cs_tid
+		(tidcode) 
+		values 
+		(#{tidcode})
+	</insert>	
+	<!-- 取tid数量 -->
+	<select id="getTidCount"
+		resultType="int">
+		select count(*) from t_cs_tid	
+	</select>	
+	<!-- 判断是否存在tid码 -->
+	<select id="getTidByCode"
+		resultType="string" parameterType="string">
+		select * from t_cs_tid where tidcode = #{tidcode}
+	</select>
+	<!-- 删除tid码 -->
+	<select id="deleteTidByCode" parameterType="string">
+		delete from t_cs_tid where tidcode = #{tidcode}
+	</select>	
+</mapper>

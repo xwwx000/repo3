@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwwx.sewage.dao.LogDao">
+	<!-- 插入日志数据 -->
+	<insert id="insertLog" parameterType="com.xwwx.sewage.bean.TCommLog">
+		insert t_comm_log
+		(userid,username,useripaddress,logtype,logdesc) 
+		values 
+		(#{userid},#{username},#{useripaddress},#{logtype},#{logdesc})
+	</insert>
+	<!-- 查询日志 -->
+	<select id="getLogList" resultType="com.xwwx.sewage.bean.TCommLog" parameterType="java.util.Map">
+		select * from t_comm_log where 1=1
+		<if test="stime!=null and etime!=null">
+			and date_format(processtime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="logtype!=null">
+			and logtype=#{logtype}
+		</if>
+		<!-- order by processtime desc -->
+		
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>	
+		
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>
+	<select id="getLogListCount" resultType="Integer" parameterType="java.util.Map">
+		select count(*) from t_comm_log where 1=1
+		<if test="stime!=null and etime!=null">
+			and date_format(processtime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="logtype!=null">
+			and logtype=#{logtype}
+		</if>
+	</select>
+	<delete id="clearLog" parameterType="java.util.Map">
+		delete from t_comm_log where 1=1
+		<if test="stime!=null and etime!=null">
+			and date_format(processtime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+	</delete>
+</mapper>

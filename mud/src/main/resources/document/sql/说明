@@ -1,0 +1,68 @@
+唯一索引,三种方法
+1.
+CREATE TABLE t_comm_user(
+	ID INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				/*自增ID*/
+ 	USERID VARCHAR(20) NOT NULL,												/*用户编码*/
+    USERNAME VARCHAR(20) NOT NULL DEFAULT '',  					/*用户名称*/
+    PRIMARY KEY (ID)，
+    UNIQUE (USERID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+2.
+CREATE TABLE t_comm_user(
+	ID INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				/*自增ID*/
+ 	USERID VARCHAR(20) NOT NULL,												/*用户编码*/
+    USERNAME VARCHAR(20) NOT NULL DEFAULT '',  					/*用户名称*/
+    PRIMARY KEY (ID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE t_comm_user ADD UNIQUE(USERID);
+
+3.
+CREATE TABLE t_comm_user(
+	ID INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				/*自增ID*/
+ 	USERID VARCHAR(20) NOT NULL UNIQUE,								/*用户编码*/
+    USERNAME VARCHAR(20) NOT NULL DEFAULT '',  					/*用户名称*/
+    PRIMARY KEY (ID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---------mysql 连接数量
+show full processlist;
+
+---------redis连接数
+方法1：在redis-cli命令行使用：info clients可以查看当前的redis连接数
+方法2：config get maxclients 可以查询redis允许的最大连接数
+---------redis连接数设置
+1. 在2.6之后版本，可以修改最大连接数配置，默认10000，可以在redis.conf配置文件中修改
+# maxclients 10000
+2.config set maxclients num 可以设置redis允许的最大连接数
+127.0.0.1:6379> CONFIG set maxclients 10
+OK
+127.0.0.1:6379>
+3.启动redis.service服务时加参数--maxclients 100000来设置最大连接数限制
+redis-server --maxclients 100000 -f /etc/redis.conf
+
+--------设置jedis的最大连接数
+redis.maxTotal=30
+
+
+------------------------------------------------------------------------------------------备份----------------------------
+1.导出指定表的数据
+
+     mysqldump -t database -u username -ppassword --tables table_name1 table_name2 table_name3 >D:\db_script.sql
+
+  2.导出指定表的结构
+
+    mysqldump -d database -u username -ppassword --tables table_name1 table_name2 table_name3>D:\db_script.sql
+
+  3.导出表的数据及结构
+
+    mysqldump  database -u username -ppassword --tables table_name1 table_name2 table_name3>D:\db_script.sql
+
+ 4.若 数据中 ，某些表除外，其余表都需导出
+
+    mysqldump -h IP -u username -ppassword --default-character-set=utf8 --database database_name --ignore-table=database_name.table_name1
+
+    --ignore-table=database_name.table_name2 --ignore-table=database_name.table_name3 >D:\db_script.sql
+ ———————————————— 
+版权声明：本文为CSDN博主「xianjie0318」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/xianjie0318/article/details/81101007

@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwwx.sewage.dao.OrderDao">
+	<resultMap id="sGoodsDeptResult" type="com.xwwx.sewage.bean.TCsGoodsDept" >
+ 		<id column="id" property="id"/>
+	    <result column="sgoodsdeptcode" property="deptcode"/>
+	    <result column="sgoodsdeptname" property="deptname"/>
+	    <result column="sgoodsdeptmark" property="deptmark"/>
+	</resultMap>
+	<resultMap id="rGoodsDeptResult" type="com.xwwx.sewage.bean.TCsGoodsDept" >
+ 		<id column="id" property="id"/>
+	    <result column="rgoodsdeptcode" property="deptcode"/>
+	    <result column="rgoodsdeptname" property="deptname"/>
+	</resultMap>
+	<resultMap id="rfidCountRResult" type="java.util.Map" >
+	    <result column="rgoodsdept" property="rgoodsdept"/>
+	    <result column="num" property="num"/>
+	</resultMap>
+	<resultMap id="rfidCountSResult" type="java.util.Map" >
+	    <result column="sgoodsdept" property="sgoodsdept"/>
+	    <result column="num" property="num"/>
+	</resultMap>			
+	<!-- 插入称重数据 -->
+	<insert id="insertOrder" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		insert t_cs_order 
+		(snum,carnum,goodstype,goodsweight,sgoodsdept
+			<if test="consignor!=null ">
+        		,consignor
+    		</if >		
+			<if test="consignee!=null ">
+        		,consignee
+    		</if >
+    		,sgoodstime,rgoodsdept
+			<if test="rfid!=null ">
+        		,rfid
+    		</if >
+			<if test="rgoodsstatus!=null ">
+        		,rgoodsstatus
+    		</if >
+    		<if test="rgoodsostatus!=null ">
+        		,rgoodsostatus
+    		</if >
+    		<if test="status!=null ">
+        		,status
+    		</if >
+    		<if test="otheri1!=null ">
+        		,otheri1
+    		</if >    		
+		) 
+		values 
+		(#{snum},#{carnum},#{goodstype},#{goodsweight},#{sgoodsdept}
+			<if test="consignor!=null ">
+        		,#{consignor}
+    		</if >		
+			<if test="consignee!=null ">
+        		,#{consignee}
+    		</if >
+			,#{sgoodstime},#{rgoodsdept}
+			<if test="rfid!=null ">
+        		,#{rfid}
+    		</if >		
+			<if test="rgoodsstatus!=null ">
+        		,#{rgoodsstatus}
+    		</if >
+    		<if test="rgoodsostatus!=null ">
+        		,#{rgoodsostatus}
+    		</if >
+    		<if test="status!=null ">
+        		,#{status}
+    		</if >
+    		<if test="otheri1!=null ">
+        		,#{otheri1}
+    		</if >    		
+		)
+	</insert>
+	<!-- 更新称重数据 -->
+	<update id="updateOrder" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		update t_cs_order 
+		set carnum=#{carnum},goodstype=#{goodstype},goodsweight=#{goodsweight},sgoodsdept=#{sgoodsdept},otheri1=#{otheri1}
+		<if test="rgoodsdept!=null ">
+        	,rgoodsdept=#{rgoodsdept}
+    	</if >
+		where id=#{id}
+	</update>	
+	<!-- 删除数据 -->
+	<delete id="deleteOrder" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		delete from t_cs_order where id=#{id}
+	</delete>
+	<!-- 手工插入称重数据 -->
+	<insert id="insertManualOrder" parameterType="com.xwwx.sewage.bean.TCsOrder">
+	<!-- 自定义流水号 但是需要字段增加为40位
+		<selectKey keyProperty="snum" order="BEFORE" resultType="String">  
+            SELECT REPLACE(UUID(), '-', '') 
+        </selectKey>
+     -->    
+		insert t_cs_order 
+		(snum,carnum,goodstype,goodsweight,sgoodsdept,consignor,consignee,sgoodstime,rgoodsdept,rgoodstime,rfidstatus,status,manualflag,remark,otheri1) 
+		values 
+		(#{snum},#{carnum},#{goodstype},#{goodsweight},#{sgoodsdept},#{consignor},#{consignee},#{sgoodstime},#{rgoodsdept},#{rgoodstime},#{rfidstatus},#{status},#{manualflag},#{remark},#{otheri1})
+	</insert>	
+	<!-- 查询等待封签数据 -->
+	<select id="getOrderWaitRfidCode" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="string">
+		select * from t_cs_order where sgoodsdept in 
+		<foreach collection="sgoodsdept" item="id" index="index" open="(" close=")" separator=",">
+	  	#{id}
+		</foreach>
+		 and rfidstatus=0 and status=0 and (goodstype='污泥' or goodstype='尾产物') and otheri1=1
+	</select>
+	<!-- 查询等待收货数据 -->
+	<select id="getOrderByRfidCode" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="string">
+		select * from t_cs_order where rfid = #{rfidcode}
+	</select>	
+	<!-- 更新称重数据 发货pda封签 -->
+	<update id="updateOrderPdaSGoods" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		update t_cs_order 
+		set rfid=#{rfid},rfidstatus=#{rfidstatus}
+		where id=#{id}
+	</update>
+	<!-- 更新称重数据 收货pda验证 -->
+	<update id="updateOrderPdaRGoods" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		update t_cs_order 
+		set rgoodsstatus=#{rgoodsstatus},
+			rgoodsostatus=#{rgoodsostatus},
+			<if test="lo!=null ">
+        		lo=#{lo},
+    		</if >
+    		<if test="la!=null ">
+        		la=#{la},
+    		</if >
+    		rgoodstime=#{rgoodstime}
+		where rfid=#{rfid}
+	</update>	
+	<select id="getOrderList" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="java.util.Map">
+		select * from t_cs_order where 1=1 
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+		<if test="sgoodsdept!=null">
+			and (sgoodsdept=#{sgoodsdept})
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>		
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="rgoodsstatus!=null">
+			and rgoodsstatus=#{rgoodsstatus}
+		</if>
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>	
+		<if test="otheri1!=null">
+			and otheri1=#{otheri1}
+		</if>				
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>			
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>
+	<select id="getOrderListCount" resultType="Integer" parameterType="String">
+		select count(*) from t_cs_order where 1=1 and status=0
+		<if test="sgoodsdept!=null">
+			and  (sgoodsdept=#{sgoodsdept})
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>			
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>
+		<if test="otheri1!=null">
+			and otheri1=#{otheri1}
+		</if>			
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="rgoodsstatus!=null">
+			and rgoodsstatus=#{rgoodsstatus}
+		</if>
+	</select>
+	<select id="getOrderOmitList" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="java.util.Map">
+		select * from t_cs_order where 1=1 and status=1
+		<if test="sgoodsdept!=null">
+			and  (sgoodsdept=#{sgoodsdept})
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>			
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>			
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>			
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>
+	<select id="getOrderOmitListCount" resultType="Integer" parameterType="String">
+		select count(*) from t_cs_order where 1=1 and status=1
+		<if test="sgoodsdept!=null">
+			and  (sgoodsdept=#{sgoodsdept})
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>			
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>	
+	</select>	
+	<select id="getOrderListWeight" resultType="Double" parameterType="String">
+		select sum(goodsweight)*0.001 from t_cs_order where 1=1
+		<if test="sgoodsdept!=null">
+			and (sgoodsdept=#{sgoodsdept})
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>			
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="rgoodsstatus!=null">
+			and rgoodsstatus=#{rgoodsstatus}
+		</if>
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+	</select>	
+	<select id="exportOrderList" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="java.util.Map">
+		select * from t_cs_order where 1=1 
+		<if test="sgoodsdept!=null">
+			and sgoodsdept=#{sgoodsdept}
+		</if>
+		<if test="rgoodsdept!=null">
+			and (rgoodsdept like "%"#{rgoodsdept}"%")
+		</if>		
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="rgoodsstatus!=null">
+			and rgoodsstatus=#{rgoodsstatus}
+		</if>
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>		
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>	
+	</select>		
+	<!-- 取货物类型列表 -->
+	<select id="getAllSGoodsTypeList" resultType="com.xwwx.sewage.bean.TCsGoodsType" >
+		select * from t_cs_goodstype where status=0
+	</select>	
+	<!-- 取发货部门列表 -->
+	<select id="getAllSGoodsDeptList" resultMap="sGoodsDeptResult" >
+		select * from t_cs_sgoodsdept where status=0
+	</select>
+	<!-- 分页 发货部门 -->
+	<select id="getSGoodsDeptList" resultMap="sGoodsDeptResult" parameterType="java.util.Map">
+		select * from t_cs_sgoodsdept
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>			
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>
+	<select id="getSGoodsDeptCount" resultType="Integer" parameterType="String">
+		select count(*) from t_cs_sgoodsdept
+	</select>	
+	<!-- 插入发货部门 -->
+	<insert id="insertSGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+		insert t_cs_sgoodsdept 
+		(sgoodsdeptname,sgoodsdeptmark,status) 
+		values 
+		(#{deptname},#{deptmark},#{status})
+	</insert>
+	<!-- 删除发货部门 -->
+	<delete id="deleteSGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+	   delete from t_cs_sgoodsdept where id=#{id}
+	</delete>	
+	<!--修改发货部门-->
+	<update id="updateSGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+       update t_cs_sgoodsdept set sgoodsdeptname=#{deptname},sgoodsdeptmark=#{deptmark},status=#{status} WHERE id=#{id}
+	</update>	
+	
+	<!-- 取收货部门列表 -->
+	<select id="getAllRGoodsDeptList" resultMap="rGoodsDeptResult" >
+		select * from t_cs_rgoodsdept where status=0
+	</select>
+	<!-- 分页 收货部门 -->
+	<select id="getRGoodsDeptList" resultMap="rGoodsDeptResult" parameterType="java.util.Map">
+		select * from t_cs_rgoodsdept
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>			
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>
+	<select id="getRGoodsDeptCount" resultType="Integer" parameterType="String">
+		select count(*) from t_cs_rgoodsdept
+	</select>		
+	<!-- 插入收货部门 -->
+	<insert id="insertRGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+		insert t_cs_rgoodsdept 
+		(rgoodsdeptname,status) 
+		values 
+		(#{deptname},#{status})
+	</insert>
+	<!-- 删除收货部门 -->
+	<delete id="deleteRGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+	   delete from t_cs_rgoodsdept where id=#{id}
+	</delete>	
+	<!--修改收货部门-->
+	<update id="updateRGoodsDept" parameterType="com.xwwx.sewage.bean.TCsGoodsDept">
+       update t_cs_rgoodsdept set rgoodsdeptname=#{deptname},status=#{status} WHERE id=#{id}
+	</update>
+		
+	<!-- 根据流水号取业务数据 -->
+	<select id="getOrderById" resultType="com.xwwx.sewage.bean.TCsOrder" >
+		select * from t_cs_order where id=#{id}
+	</select>	
+	<!-- 更新备注 -->
+	<update id="updateRemark">
+		update t_cs_order 
+		set remark=#{remark}
+		where id=#{id}
+	</update>
+	<!-- 更新遗漏标志 -->
+	<update id="updateOmitStatus">
+		update t_cs_order 
+		set status=1
+		where id=#{id}
+	</update>
+	<select id="getOrderManualList" resultType="com.xwwx.sewage.bean.TCsOrder" parameterType="java.util.Map">
+		select * from t_cs_order where 1=1 and status=1
+		<if test="sgoodsdept!=null">
+			and sgoodsdept=#{sgoodsdept}
+		</if>
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>		
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>	
+		<if test="manualflag!=null">
+			and manualflag=#{manualflag}
+		</if>
+		<if test="orderby!=null  and ascordesc!=null">
+			order by ${orderby} ${ascordesc}
+		</if>			
+		<if test="start!=null and count!=null">
+			limit #{start}, #{count}
+		</if>
+	</select>	
+	<select id="getOrderManualListCount" resultType="Integer" parameterType="String">
+		select count(*) from t_cs_order where 1=1 and status=1
+		<if test="sgoodsdept!=null">
+			and sgoodsdept=#{sgoodsdept}
+		</if>
+		<if test="goodstype!=null">
+			and goodstype=#{goodstype}
+		</if>	
+		<if test="manualflag!=null">
+			and manualflag=#{manualflag}
+		</if>			
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		<if test="carnum!=null">
+			and carnum=#{carnum}
+		</if>	
+	</select>		
+	<!-- 删除手工数据 -->
+	<delete id="deleteOrderManual">
+		delete from t_cs_order
+		where id=#{id}
+	</delete>	
+	<!-- 更新手工数据 -->
+	<update id="updateOrderManual" parameterType="com.xwwx.sewage.bean.TCsOrder">
+		update t_cs_order 
+		set carnum=#{carnum},goodstype=#{goodstype},goodsweight=#{goodsweight},sgoodsdept=#{sgoodsdept},consignor=#{consignor},consignee=#{consignee}
+		<if test="sgoodstime!=null">
+			,sgoodstime=#{sgoodstime}
+		</if>
+		,rgoodsdept=#{rgoodsdept}
+		<if test="rgoodstime!=null">
+			,rgoodstime=#{rgoodstime}
+		</if>	
+		,remark=#{remark}
+		where id=#{id}
+	</update>
+	<!-- 按收货单位统计封签数据 -->	
+	<select id="getOrderRfidCountR" resultMap="rfidCountRResult" parameterType="java.util.Map">
+		select rgoodsdept,count(id) num from t_cs_order where rfidstatus = 1
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		group by rgoodsdept
+	</select>	
+	<!-- 按发货单位统计封签数据 -->	
+	<select id="getOrderRfidCountS" resultMap="rfidCountSResult" parameterType="java.util.Map">
+		select sgoodsdept,count(id) num from t_cs_order where rfidstatus = 1
+		<if test="stime!=null and etime!=null">
+			and date_format(sgoodstime, '%Y-%m-%d') between #{stime} and #{etime}
+		</if>	
+		group by sgoodsdept
+	</select>			
+</mapper>

@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 全局 */
+*{ margin: 0; padding:0; outline: none; box-sizing:border-box;}
+body{ font-size:100%; color:#565656; font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+ul,ol,li{ list-style-type: none;}
+a{ text-decoration: none;}
+input{ font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+.clearfix:after{ content: "."; clear: both; display: block; height: 0; visibility: hidden;}
+
+
+.localization{ margin-bottom:20px; color:#585c61;}
+.localization .title{ width: 100%; padding-bottom:.5em; border-bottom: #e5e8f1 1px solid; margin-bottom: 10px;}
+.localization .title h3{ width: 100%; height: 1em; line-height: 1em; font-size: 1em; font-weight: 500; color:#376e97; border-left:#376e97 3px solid; padding-left: .5em; display: block;}
+
+.localization .rightContent{ margin-bottom: 10px; font-size: .875em;}
+.localization .rightContent #licenseNumber, 
+.localization .rightContent #city, 
+.localization .rightContent #busName, 
+.localization .rightContent #station{ 
+	height: 2em; line-height: 2em; text-indent: .5em;
+}
+#licenseNumber{width: 9em;}
+.range{ height: 2em; line-height: 2em;}
+#city, #busName, #station{ width: 10em;}
+
+.My97Date{ height: 2em!important; line-height: 2em; text-indent: .5em;}
+
+
+.localization .rightContent input[type="button"]{ 
+	height: 2em; padding:0 1em; background-color: #5ebf3a; color:#fff; border:0; border-radius: 3px; cursor: pointer;
+	/* IE7&IE6 Hack */
+	*padding: 0 3px;
+}
+.localization .rightContent input[type="range"]{ width: 100%; height: 2em; padding:0 1em; color:#fff; border:0; border-radius: 3px; cursor: pointer;}
+.localization .rightContent input[type="radio"]{ margin-left: 2em;}
+
+label[for="city"], 
+label[for="busName"], 
+label[for="station"]{ 
+	width: 5em; height: 2em; line-height: 2em; text-align: right; display: block; float: left;
+	/* IE8 Hack */
+	width: 5.2em\0;
+}
+
+.localization .rightContent select{ height:2em; font-size: .875em; font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+.localization .result{ margin-top: 10px;}
+.carDiv{ font-size: .875em;}
+.localization .result label{ height: 2em; line-height: 2em; display: block; font-size: .875em;}
+.tableAlarm th{ height: 2em; line-height: 2em; font-weight: 500; font-size: .875em;}
+.trackControl li{ 
+	width: 22%; float: left; padding:0 2px;
+	/* IE7&IE6 Hack */
+	*width: 20%; *padding:0 0px; *margin-right:3px;
+}
+.trackControl li:first-child{ 
+	width: 34%;
+	/* IE7&IE6 Hack */
+	*width:32%; *padding:0 0px;
+}
+.trackControl li input{ 
+	margin:0 auto; display: block;
+}
+.carDiv{ 
+	width: 100%; padding:8px; border:#bebebe 1px solid; overflow-y: scroll;
+	/* IE7&IE6 Hack */
+	*width: 254px;
+}
+.divVehicle{ 
+	height: 290px;
+	/* IE7&IE6 Hack */
+	*height: 280px;
+}
+.divHistory{ height: 150px;}
+.divBus{ 
+	height: 280px;
+	/* IE7&IE6 Hack */
+	*height: 265px;
+}
+.divAlarm{ 
+	height: 370px;
+	/* IE7&IE6 Hack */
+	*height: 360px;
+}
+
+
+.statisticalQuery{ width: 100%; margin-bottom:20px; font-size: .875em;}
+.statisticalQuery li{ float: left; margin-right:8px;}
+.statisticalQuery select{ height:2em; font-size: .875em; font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";}
+.statisticalQuery input[type="date"],
+.statisticalQuery input[type="button"]{ 
+	height: 2em; font-size: .875em; font-family:"Microsoft YaHei", "SimSun", "Segoe UI", "Verdana", "Helvetica", "Sans-Serif";
+}
+.statisticalQuery input[type="button"]{ padding:0 1.5em; background-color:#5ebf3a; color:#fff; border:0; cursor: pointer; border-radius: 3px;}
+.statisticalQuery label,
+.statisticalQuery select,
+.statisticalQuery p{ 
+	float: left; line-height: 2em;
+}
+.fuelConsumption{ text-align: center;}
+
+.mileage table{ background:#e5e8f1;}
+.mileage table th{ background:#ebf4fd; color:#077bd2; height: 2.5em; line-height: 2.5em; font-weight: 500;}
+.mileage table td{ height: 2em; line-height: 2em; font-size: .875em; background-color:#fff; text-align: center;}
+.mileage table td em{ color:#ea5859; font-weight: 500; font-style: normal;}

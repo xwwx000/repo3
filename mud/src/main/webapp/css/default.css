@@ -1,0 +1,278 @@
+SELECT {
+	BACKGROUND-COLOR: #F7F7F7; 
+	BORDER-BOTTOM-COLOR: #E4E7E2; 
+	BORDER-LEFT-COLOR: #E4E7E2; 
+	BORDER-RIGHT-COLOR: #E4E7E2; 
+	BORDER-TOP-COLOR: #E4E7E2; 
+	COLOR: #000000; 
+	FONT-SIZE: 12px;
+	height : 25px;
+	cursor:pointer;
+}
+.select120{
+	FONT-SIZE: 12px;
+	width : 120px;
+	height : 25px;
+	cursor:pointer;	
+	background-color : #F7F7F7;
+}
+
+.editButton
+{
+	FONT-SIZE: 9pt;
+	height: 21px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	background-image: url(../images/htimages/buttonbg.gif);
+	border: 1px solid #CCDEF7;
+}
+.noeditButton
+{
+    BORDER-BOTTOM: #4a3163 1px solid;
+    BORDER-LEFT: #4a3163 1px solid;
+    BORDER-RIGHT: #4a3163 1px solid;
+    BORDER-TOP: #4a3163 1px solid;
+    FONT-SIZE: 9pt; 
+    height: 21px; padding-bottom: 2px; padding-top: 2px; 
+    background-image: url(../images/htimages/buttonbg_1.gif)
+}
+.editText
+{
+	FONT-SIZE: 12px;
+	/*border: 1px solid #F5F4EF;*/
+	/*border: 1px solid #9ac0f1;*/
+	height : 16px;
+}
+.editTextnoline
+{
+	FONT-SIZE: 12px;
+	border:none;
+	border-bottom:#0f3e6a 1px solid;
+	height : 16px;
+	background:rgba(0, 0, 0, 0);
+	padding-left: 5px;
+}
+.editTextNoBorder
+{
+    BORDER-BOTTOM: #4a3163 0px solid;
+    BORDER-LEFT: #4a3163 0px solid;
+    BORDER-RIGHT: #4a3163 0px solid;
+    BORDER-TOP: #4a3163 0px solid;
+    FONT-SIZE: 9pt
+}
+.editTextLine
+{
+    BORDER-BOTTOM: #4a3163 1px solid;
+    BORDER-LEFT: #4a3163 0px solid;
+    BORDER-RIGHT: #4a3163 0px solid;
+    BORDER-TOP: #4a3163 0px solid;
+    FONT-SIZE: 9pt;
+  	background:transparent;
+}
+.editTextArea
+{
+    BORDER-BOTTOM: #4a3163 1px solid;
+    BORDER-LEFT: #4a3163 1px solid;
+    BORDER-RIGHT: #4a3163 1px solid;
+    BORDER-TOP: #4a3163 1px solid;
+    FONT-SIZE: 9pt
+}
+.editTextBlock
+{
+    BORDER-BOTTOM: #4a3163 0px solid;
+    BORDER-LEFT: #4a3163 0px solid;
+    BORDER-RIGHT: #4a3163 0px solid;
+    BORDER-TOP: #4a3163 0px solid;
+    FONT-SIZE: 9pt;
+    COLOR:#0000FF;
+    BACKGROUND-COLOR: #F0F8FF
+}
+TD {
+	FONT-SIZE: 9pt; LINE-HEIGHT: 13pt
+}
+TABLE {
+	FONT-SIZE: 9pt; LINE-HEIGHT: 13pt
+}
+body,table {font-size: 9pt}
+BODY {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: 宋体;
+	clip:    rect(2 2px  2);
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-left: 0px;
+	background-color: #F4FAFF;
+	margin-bottom: 0px;
+	background:url(../images/new/right_bg.gif);
+	height:100%;
+}
+.myBody {
+	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: 宋体; BACKGROUND-COLOR: #fffff0
+}
+A:link {
+	COLOR: #082d71; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #082d71; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #082d71; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: none
+}
+TEXTAREA {
+	BACKGROUND-COLOR: #ffffff; COLOR: #082d71
+}
+.contentTable {  background-color: #E4E7E2; font-size: 12px}
+.tableTitle {  background-color: #E6F2FE; color: #000000; font-size: medium}
+
+.tableListDetail0 {  background-color: #FFFFFF}
+
+.tableListDetail1 {  background-color: #F6F6F6}
+.mySelectOn {
+	COLOR: #ffffff; BACKGROUND-COLOR: #0000ff
+}
+.mySelectOnoever {
+	COLOR: #000000; BACKGROUND-COLOR: #C0C0C0
+}
+.codeTry1 {
+	BACKGROUND-COLOR: #ffffff
+}
+.codeTry2 {
+	BACKGROUND-COLOR: #fdf9e3
+}
+.mySelectOnoever {
+	COLOR: #000000; BACKGROUND-COLOR: #C0C0C0
+}
+.pageTable{background-color: #FFFFFF}
+.editLabel {COLOR: #000000; background-color: #EEEFF0}
+
+.editInput {  background-color: #FFFFFF}
+
+.functionTitle {  font-size: 12px; color: #000000}
+
+.section {  background-color: #FFE1C4; font-size: 14px; color: #0033FF}
+
+.topTable {
+	BACKGROUND-COLOR: #4CA48B; COLOR: #082d71
+}
+.framebgcolor {  background-color: #525780}
+
+.topLeftTable{background-image:url(../images/htimages/banner_left.gif)}
+.topRightTable{background-image:url(../images/htimages/banner_right.gif)}
+.hot{color:red}
+.defaultBGColor{BACKGROUND-COLOR: #FFFFFF}
+.pageTableTRBGColor{BACKGROUND-COLOR:#FFFFFF}
+.textRed
+{
+	 font-family:Arial;
+	 font-size:10pt;
+	 font-weight:bold;
+	 color:#ff0000;
+	 text-decoration:underline;
+}
+.textbox
+{
+	BORDER-RIGHT: black 0px solid;
+	BORDER-TOP: black 0px solid;
+	BORDER-LEFT: black 0px solid;
+	BORDER-BOTTOM: black 0px solid;
+	margin-left:11px;
+	FONT-SIZE: 10pt;
+	FONT-FAMILY: arial;
+	color:#000000;
+	WIDTH: 20px;
+	background:transparent;
+}
+.btn {
+	BORDER-RIGHT: #1c67ab 1px solid; BORDER-TOP: #1c67ab 1px solid; FONT-SIZE: 12px; MARGIN-LEFT: 6px; BORDER-LEFT: #1c67ab 1px solid; CURSOR: hand; COLOR: #1c67ab; MARGIN-RIGHT: 6px; PADDING-TOP: 2px; BORDER-BOTTOM: #1c67ab 1px solid; FONT-FAMILY: 宋体; HEIGHT: 20px; BACKGROUND-COLOR: white; background-image: url(../images/img/btn_bg.gif)
+}
+.myPop {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; VISIBILITY: hidden; BORDER-LEFT: black 1px solid; WIDTH: 350px; BORDER-BOTTOM: black 1px solid; POSITION: absolute; HEIGHT: 100px; BACKGROUND-COLOR: #fffff0
+}
+.codeThy {
+	HEIGHT: 20px; BACKGROUND-COLOR: #e6f2fe
+}
+.codeThyTitle {
+	HEIGHT: 20px; BACKGROUND-COLOR: #ffcccc
+}
+.codeThy0 {
+	HEIGHT: 20px; BACKGROUND-COLOR: #e6f2fe
+}
+.codeTry1 {
+	BACKGROUND-COLOR: #ffffff
+}
+.codeTry_zf {
+	BACKGROUND-COLOR: #ffffff ; color:Red
+}
+.codeTry_wkk {
+	BACKGROUND-COLOR: #ffffff ; color:blue
+}
+.codeTry_wkk1 {
+	BACKGROUND-COLOR: #fdf9e3 ; color:Green
+}
+.codeDiv {
+	OVERFLOW: auto; WIDTH: 100%
+}
+.myBody {
+	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: 宋体; BACKGROUND-COLOR: #fffff0
+}
+.tdWidth{
+     	WIDTH: 120px;
+}
+TABLE.ShowMessage1
+{
+    BACKGROUND-COLOR: #bbbbbb;
+    BORDER-BOTTOM: #ff0000 3px double;
+    BORDER-LEFT: #ff0000 3px double;
+    BORDER-RIGHT: #ff0000 3px double;
+    BORDER-TOP: #ff0000 3px double;
+    COLOR: #ff0000
+}
+
+DIV.ShowMessage1
+{
+    HEIGHT: 50px;
+    LEFT: 5px;
+    POSITION: absolute;
+    TOP: 5px;
+    VISIBILITY: hidden;
+    WIDTH: 400px
+}
+.dwtableListDetail1 {  background-color: #F6F6F6}
+.dwTdRead0class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 70px;height:40px}
+.dwTdRead1class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 140px;height:40px}
+.dwTdRead2class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 150px;height:40px}
+.dwTdRead3class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 200px;height:40px}
+.dwTdRead4class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 180px;height:40px}
+.dwTdRead5class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 400px;height:40px}
+.dwTdRead33class {  COLOR: #FFFFFF; background-color: #4CA48B;width: 200px;height:64px}
+.dwTdEditclass{  width: 80px;height:40px}
+.dwTrclass {BACKGROUND-COLOR: #FFFFFF; height:25px}
+INPUT.buttonface {
+	font-size: 9pt; font-style: normal; line-height: normal; font-weight: normal; font-variant: normal; height: 22px; clip:  rect(   ); color: #000000; border-color: black #000000 #000000 black; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; background-color: #FFFFFF
+}
+.1b {
+	FONT-SIZE: 12px; FONT-FAMILY: 宋体;   border-color:Silver
+}
+.mengban_head {
+			position: absolute;
+			height: 100%;
+			z-index: 10;
+			top: 0;
+			left: 0;
+			background-color: #CECECE;
+			width: 100%;
+			visibility: visible;
+			filter: alpha(opacity = 10);
+}
+#Title {
+			font-size: 12px;
+			font-weight: bold;
+			background-color: #f7f7f7;
+			background-image: url(../images/htimages/fen1.gif);
+			background-repeat: no-repeat;
+			padding-left: 60px;
+			padding-top: 3px;
+}

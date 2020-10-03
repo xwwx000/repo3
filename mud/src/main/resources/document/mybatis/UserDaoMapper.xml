@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwwx.sewage.dao.UserDao">
+	<resultMap type="com.xwwx.sewage.bean.User"  id="userMap">
+		<id property="id" column="id"/>
+	</resultMap>
+    <select id="getUserByUserId" resultMap="userMap" parameterType="string">
+        select * from t_user where userid = #{userId}
+    </select>
+   <select id="getUserByUserIdAndId" resultMap="userMap">
+        select * from t_user
+        where 1=1
+        <choose>
+        <when test="userId!=null and userId!=''">
+        and 	userid = #{userId}
+        </when>
+        <when test="id!=null and id!=''">
+        and id = #{id}
+        </when>
+        <otherwise>
+        and 1=2
+        </otherwise>
+        </choose>
+    </select>
+    <select id="getUserByIds" resultType="com.xwwx.sewage.bean.User">
+    	select * from t_user
+    	where id in
+    	<foreach collection="ids" open="(" close=")" separator="," item="id">#{id}</foreach>
+    </select>
+    
+    <select id="getAllUser" resultType="com.xwwx.sewage.bean.User">
+    	select * from t_user
+    	where 1=1
+    	<if test="userid != null and userid!=''">
+    	and userid = #{userid}
+    	</if>
+    	<if test="username!=null and username!=''">
+    	and username like concat('%',#{username},'%')
+    	</if>
+    	<if test="username!=null and username!=''">
+    	<bind name="userNameLike"  value="'%' + username + '%'" />
+    	and username like concat('%',#{username},'%')
+    	</if>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    	insert into t_user(userid,username)values(#{userid},#{username})
+    </insert>
+    <update id="update">
+    	update t_user set 
+    	<if test="userid!=null and userid!=''">
+    	userid=#{userid},
+    	</if>
+    	<if test="username!=null and username!=''">
+    	username=#{username},
+    	</if>    	
+		id=#{id}
+		where id=#{id}
+    </update>
+    
+    <update id="updateUserByMap">
+    	update t_user set
+    	<foreach collection="_parameter" item="val" index="key" separator=",">
+    		${key} = #{val}
+    	</foreach>
+    	where id = #{id}
+    </update>
+</mapper>

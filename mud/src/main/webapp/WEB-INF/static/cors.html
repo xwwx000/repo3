@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/tool/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function (){
+		alert(1121);
+		$.ajax({
+			url:'http://localhost:9999/mywebapp/index/login',
+			success:function(data){
+				alert(data);
+			},
+			complete:function(XMLHttpRequest,textStatus){  
+		            alert("complete");
+		        },  
+		        error:function(XMLHttpRequest, textStatus){  
+		            alert("error");
+		       }  
+		})
+	});
+});
+</script>
+</head>
+<body>
+	<button id="btn" name="btn">submit</button>
+</body>
+</html>
